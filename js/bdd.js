@@ -517,9 +517,9 @@ var Mobs = {
 
 // Qualités Compos
 var Qualites_Compos = {
-	"Très Mauvaise":0,
-	"Mauvaise":1,
-	"Moyenne":2,
-	"Bonne":3,
-	"Très Bonne":4
+	"Très Mauvaise":-2,
+	"Mauvaise":-1,
+	"Moyenne":0,
+	"Bonne":1,
+	"Très Bonne":2
 }

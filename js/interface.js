@@ -8,15 +8,24 @@
 /* Initialisation ------------------------------------------------------------*/
 var
 	alphabet = {},
-	alphabet_face = document.getElementById("alphabet_face"),
-	choix_face = document.getElementById("choix_face"),
-	choix_encre = document.getElementById("choix_encre"),
-	qualite_popo = document.getElementById("qualite_popo"),
-	qualite_champi = document.getElementById("qualite_champi"),
-	indicateur_EP = document.getElementById("indicateur_EP"),
-	alphabet_mob = document.getElementById("alphabet_mob"),
-	choix_mob = document.getElementById("choix_mob"),
-	qualite_mob = document.getElementById("qualite_mob");
+	aInitialiser = {
+		"alphabet_face":1,
+		"choix_face":1,
+		"choix_face":1,
+		"choix_encre":1,
+		"qualite_popo":1,
+		"qualite_champi":1,
+		"indicateur_EP":1,
+		"alphabet_mob":1,
+		"choix_mob":1,
+		"qualite_mob":1,
+		"bm_min":1,
+		"bm_max":1,
+		"bm_duree":1
+	};
+for(var id in aInitialiser) {
+	this[id] = document.getElementById(id);
+}
 
 // Initialisation Faces
 alphabet = {};
@@ -32,7 +41,7 @@ for(var lettre in alphabet) {
 	link.appendChild(text);
 	link.lettre = lettre;
 	link.style.cursor = "pointer";
-	link.onclick = update_face;
+	link.onclick = maj_face;
 	alphabet_face.appendChild(link);
 	appendText(alphabet_face," ");
 }
@@ -63,7 +72,7 @@ for(var lettre in alphabet) {
 	link.appendChild(text);
 	link.lettre = lettre;
 	link.style.cursor = "pointer";
-	link.onclick = update_fixant;
+	link.onclick = maj_fixant;
 	alphabet_mob.appendChild(link);
 	appendText(alphabet_mob," ");
 }
@@ -72,8 +81,8 @@ for(var qualite in Qualites_Compos) {
 }
 
 /* DOM Handlers --------------------------------------------------------------*/
-function update_face() {
-	var	
+function maj_face() {
+	var
 		lettre = this.lettre,
 		start = "Abishaii Blanc";
 	for(var i=choix_face.childNodes.length-1 ; i>=0 ; --i) {
@@ -86,10 +95,11 @@ function update_face() {
 		}
 	}
 	choix_face.value = start;
+	maj_resultat();
 }
 
-function update_fixant() {
-	var	
+function maj_fixant() {
+	var
 		lettre = this.lettre,
 		start = "Abishaii Bleu";
 	for(var i=choix_mob.childNodes.length-1 ; i>=0 ; --i) {
@@ -102,6 +112,7 @@ function update_fixant() {
 		}
 	}
 	choix_mob.value = start;
+	maj_resultat();
 }
 
 function bascule_type_encre() {
@@ -116,7 +127,54 @@ function bascule_type_encre() {
 
 /* Calculs ------------------------------------------------------------------*/
 function calcul_duree(mob,qualite) {
-// Calcul de la durée suivant la méthode de Monk
-	
+// Calcul de la durée suivant la méthode El Monkiess
+	var
+		duree_base = 7+2*Math.floor(Mobs[mob]/5),
+		var_qualite = Math.min(4,(1+Math.floor(Mobs[mob]/5))/2);
+	return duree_base+Math.floor(Qualites_Compos[qualite]*var_qualite);
 }
 
+function calcul_effet(face,encre,qualite) {
+// Calcul de l'effet
+// Pour l'instant, seules les stats impactées sont indiquées
+	var effet = Faces[face].stat1+" +X";
+	if(Faces[face].stat2) {
+		effet += " | "+Faces[face].stat2+" +Y";
+	}
+	return effet;
+}
+
+function maj_resultat() {
+	var qualite_encre;
+	if(choix_encre.value==="Potion de Painture") {
+		qualite_encre = qualite_popo.value;
+	} else {
+		qualite_encre = qualite_champi.value;
+	}
+	/*window.console.debug(
+		choix_face.value,
+		choix_encre.value,
+		qualite_encre,
+		choix_mob.value,
+		qualite_mob.value
+	);*/
+	bm_min.innerHTML = calcul_effet(
+		choix_face.value,
+		choix_encre.value,
+		qualite_encre.value
+	);
+	bm_duree.innerHTML = calcul_duree(
+		choix_mob.value,
+		qualite_mob.value
+	);
+}
+
+choix_face.onchange = maj_resultat;
+choix_encre.onchange = function() {
+	bascule_type_encre();
+	maj_resultat();
+}
+qualite_popo.onchange = maj_resultat;
+qualite_champi.onchange = maj_resultat;
+choix_mob.onchange = maj_resultat;
+qualite_mob.onchange = maj_resultat;
