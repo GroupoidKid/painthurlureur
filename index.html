@@ -11,28 +11,38 @@
 
 <body>
 
-<section id="global">
-	Sélectionner une face :
+<section id="face">
+	<h2>Quelle face ?</h2>
 	<span id="alphabet_face"></span>
 	<br>
 	<select id="choix_face"></select>
-	<br>
-	
-	Sélectionner une encre :
-	<br>
+</section>
+
+<section id="encre">
+	<h2>Avec quelle encre ?</h2>
 	<select id="choix_encre"></select>
+	<select id="qualite_popo"></select>
 	<select id="qualite_champi" style="display:none;"></select>
 	<span id="indicateur_EP"></span>
+</section>
+
+<section id="fixant">
+	<h2>Avec quel agent fixant ?</h2>
+	<span id="alphabet_mob"></span>
 	<br>
-	
-	Sélectionner un agent fixant :
-	<span id="alphabet_fixant"></span>
+	<select id="choix_mob"></select>
+	<select id="qualite_mob"></select>
+</section>
+
+<section id="effet">
+	<h2>Effet attendu :</h2>
+	Min: <span id="bm_min"></span>
 	<br>
-	<select id="choix_fixant"></select>
+	Max: <span id="bm_max"></span>
 	<br>
-	<br>
-	
-	Effet attendu :
+	pendant
+	<span id="bm_duree"></span>
+	tours
 </section>
 
 <div id="debug" style="position:absolute;top:5px;left:5px;z-index:100;"></div>

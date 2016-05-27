@@ -7,14 +7,19 @@
 
 /* Initialisation ------------------------------------------------------------*/
 var
+	alphabet = {},
 	alphabet_face = document.getElementById("alphabet_face"),
 	choix_face = document.getElementById("choix_face"),
 	choix_encre = document.getElementById("choix_encre"),
+	qualite_popo = document.getElementById("qualite_popo"),
+	qualite_champi = document.getElementById("qualite_champi"),
 	indicateur_EP = document.getElementById("indicateur_EP"),
-	alphabet_fixant = document.getElementById("alphabet_fixant"),
-	choix_fixant = document.getElementById("choix_fixant");
+	alphabet_mob = document.getElementById("alphabet_mob"),
+	choix_mob = document.getElementById("choix_mob"),
+	qualite_mob = document.getElementById("qualite_mob");
 
-var alphabet = {};
+// Initialisation Faces
+alphabet = {};
 for(var face in Faces) {
 	ajouteOption(choix_face,face);
 	alphabet[face[0]]=1;
@@ -29,18 +34,25 @@ for(var lettre in alphabet) {
 	link.style.cursor = "pointer";
 	link.onclick = update_face;
 	alphabet_face.appendChild(link);
+	appendText(alphabet_face," ");
 }
 
-for(var encre in Popos) {
+// Initialisation Encres
+for(var encre in Encres) {
 	ajouteOption(choix_encre,encre);
 }
-for(var encre in Champis) {
-	ajouteOption(choix_encre,encre);
+for(var i=1 ; i<6 ; ++i) {
+	ajouteOption(qualite_popo,"niv "+i,i);
 }
+for(var qualite in Qualites_Champis) {
+	ajouteOption(qualite_champi,qualite);
+}
+choix_encre.onchange = bascule_type_encre;
 
-var alphabet = {};
+// Initialisation Agent fixant
+alphabet = {};
 for(var mob in Mobs) {
-	ajouteOption(choix_fixant,mob);
+	ajouteOption(choix_mob,mob);
 	alphabet[mob[0]]=1;
 }
 alphabet["Reset"]=1;
@@ -52,11 +64,14 @@ for(var lettre in alphabet) {
 	link.lettre = lettre;
 	link.style.cursor = "pointer";
 	link.onclick = update_fixant;
-	alphabet_fixant.appendChild(link);
+	alphabet_mob.appendChild(link);
+	appendText(alphabet_mob," ");
+}
+for(var qualite in Qualites_Compos) {
+	ajouteOption(qualite_mob,qualite);
 }
 
-
-/* Handlers ------------------------------------------------------------------*/
+/* DOM Handlers --------------------------------------------------------------*/
 function update_face() {
 	var	
 		lettre = this.lettre,
@@ -77,8 +92,8 @@ function update_fixant() {
 	var	
 		lettre = this.lettre,
 		start = "Abishaii Bleu";
-	for(var i=choix_fixant.childNodes.length-1 ; i>=0 ; --i) {
-		var option = choix_fixant.childNodes[i];
+	for(var i=choix_mob.childNodes.length-1 ; i>=0 ; --i) {
+		var option = choix_mob.childNodes[i];
 		if(lettre=="Reset" || lettre==option.value[0]) {
 			option.style.display="";
 			start = option.value;
@@ -86,6 +101,22 @@ function update_fixant() {
 			option.style.display="none";
 		}
 	}
-	choix_fixant.value = start;
+	choix_mob.value = start;
+}
+
+function bascule_type_encre() {
+	if(choix_encre.value==="Potion de Painture") {
+		qualite_popo.style.display = "";
+		qualite_champi.style.display = "none";
+	} else {
+		qualite_popo.style.display = "none";
+		qualite_champi.style.display = "";
+	}
+}
+
+/* Calculs ------------------------------------------------------------------*/
+function calcul_duree(mob,qualite) {
+// Calcul de la durée suivant la méthode de Monk
+	
 }
 

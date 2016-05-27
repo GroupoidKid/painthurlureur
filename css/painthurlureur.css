@@ -1,0 +1,22 @@
+body {
+	background-image: url("../img/fond_mh_sombre.jpg");
+	text-align: center;
+}
+section {
+	border: 1px solid black;
+	margin: 10px;
+	padding-bottom: 3px;
+	max-width: 600px;
+	background-image: url("../img/fond_mh_moyen.jpg");
+}
+h2 {
+	background-image: url("../img/fond_mh_clair.jpg");
+	border-bottom: 1px solid black;
+	font-size:16px;
+	margin: 0px;
+	padding: 2px;
+}
+select {
+	font-size: 14px;
+	margin-top: 2px;
+}

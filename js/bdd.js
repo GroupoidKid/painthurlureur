@@ -319,17 +319,9 @@ var Faces = {
 	}
 };
 
-// Popos d'encre
-var Popos = {
-	"Potion de Painture niv. 1":1,
-	"Potion de Painture niv. 2":1,
-	"Potion de Painture niv. 3":1,
-	"Potion de Painture niv. 4":1,
-	"Potion de Painture niv. 5":1
-};
-
-// Tous les Champis
-var Champis = {
+// Toutes les Encres
+var Encres = {
+	"Potion de Painture":1,
 	"Agaric Sous-Terrain":1,
 	"Amanite Trolloïde":1,
 	"Bolet Péteur":1,
@@ -343,6 +335,14 @@ var Champis = {
 	"Pleurote Pleureuse":1,
 	"Préscientus Reguis":1,
 	"Suinte Cadavre":1
+}
+
+// Qualités Champis
+var Qualites_Champis = {
+	"Acide":1,
+	"Salé":1,
+	"Sucré":1,
+	"Mielleux":1
 }
 
 // Niveaux des Monstres
@@ -465,7 +465,6 @@ var Mobs = {
 	"Mouch'oo Domestique":14,
 	"Mouch'oo Majestueux Sauvage":33,
 	"Mouch'oo Sauvage":14,
-	"Na-Haniym-Heee":0,
 	"Necrochore":37,
 	"Necromant":39,
 	"Necrophage":8,
@@ -516,3 +515,11 @@ var Mobs = {
 	"Zombie":2
 }
 
+// Qualités Compos
+var Qualites_Compos = {
+	"Très Mauvaise":0,
+	"Mauvaise":1,
+	"Moyenne":2,
+	"Bonne":3,
+	"Très Bonne":4
+}

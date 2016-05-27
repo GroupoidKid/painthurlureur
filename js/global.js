@@ -14,11 +14,14 @@ var scrollEvent =
 /* DOM-related functions -----------------------------------------------------*/
 // In alphabetical order
 
-function ajouteOption(select,str,bool) {
-// Ajoute une option de nom=value=str au select, en gras si bool=true
+function ajouteOption(select,str,value) {
+// Ajoute une option de nom=str et value=value(=str) au select
+	if(value===void(0)) {
+		value = str;
+	}
 	var option = document.createElement('option');
-	option.value = str;
-	appendText(option,str,bool);
+	option.value = value;
+	appendText(option,str);
 	select.appendChild(option);
 	return option;
 }
